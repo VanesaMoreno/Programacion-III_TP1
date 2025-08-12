@@ -48,8 +48,20 @@ productos.push(
   { id: 6, nombre: "Impresora", precio: 220000, stock: 3 },
   { id: 7, nombre: "Tablet", precio: 250000, stock: 4 }
 );
-console.log(productos)
+console.log(productos);
 
 //4.2
-const eliminado = productos.pop();
+let eliminado = productos.pop();
 console.log(`Producto eliminado ${eliminado.nombre}`);
+
+// 4. 3
+productos.unshift({ id: 8, nombre: "Parlantes", precio: 150000, stock: 5 });
+console.log(productos);
+
+// 4. 4
+eliminado = productos.shift();
+console.log(`Producto eliminado ${eliminado.nombre}`);
+
+// 4. 5
+let productosConStock = productos.filter(producto => producto.stock > 0);
+console.log(productosConStock);
