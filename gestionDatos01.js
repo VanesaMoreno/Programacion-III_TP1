@@ -32,10 +32,24 @@ let productos = [
 //console.log([productos[1]]);
 //console.log([productos[3]]);
 
-//3.1 -3.2
+//3.1 
 // for ( let producto of productos){
 //   console.log( `Nombre: ${producto.nombre}, Precio: $${producto.precio}`);
 //  };
 
+//3.2 
+productos.forEach(producto => {
+    console.log(`Producto: ${producto.nombre}, Precio: $${producto.precio}`);
+});
 
 
+//4.1 
+productos.push(
+  { id: 6, nombre: "Impresora", precio: 220000, stock: 3 },
+  { id: 7, nombre: "Tablet", precio: 250000, stock: 4 }
+);
+console.log(productos)
+
+//4.2
+const eliminado = productos.pop();
+console.log(`Producto eliminado ${eliminado.nombre}`);
