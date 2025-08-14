@@ -65,3 +65,20 @@ console.log(`Producto eliminado ${eliminado.nombre}`);
 // 4. 5
 let productosConStock = productos.filter(producto => producto.stock > 0);
 console.log(productosConStock);
+
+//4.6
+console.log("Mostrar por consola solo nombre en un solo array")
+const nombresProductos = productos.map(producto => producto.nombre)
+console.log(nombresProductos)
+
+//4.7
+console.log("Buscar producto por id especifico")
+const indiceProducto = productos.find(producto => producto.id == 4)
+console.log(indiceProducto)
+
+//4.8
+console.log("Productos ordenados en forma decreciente")
+const productosOrdenados = productos.sort(function(a, b) {
+ return b.precio - a.precio;} )
+console.log(productosOrdenados)
+
