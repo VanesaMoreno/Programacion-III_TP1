@@ -15,6 +15,10 @@ console.log(fs);
         const limiteProducts = products.slice(0, 3);     /* Limitar  primeros 3 productos*/
         console.log(limiteProducts);    
 
+        fs.writeFileSync("productos.json", JSON.stringify(limiteProducts, null, 2));/* Guardar los productos en el JSON*/
+        console.log("Archivo creado correctamente!");
+
+
     } catch (error) {
         console.error(error);                     /*Manejo de errores, mostrando el mensaje de error en la consola*/
     }
@@ -23,3 +27,28 @@ console.log(fs);
 fetchProducts();   /*LLamo a la funcion*/
 
 
+//1.4 
+async function agregarProducto() {            /*Agrego producto con POST*/
+  try {
+    const response = await fetch("https://fakestoreapi.com/products", {
+      method: "POST",
+      body: JSON.stringify({
+        title: "Remera Blanca",
+        price: 30000,
+        description: "xxxxxx",
+        image: "xxx",
+        category: "Indumentaria Femenina"
+      }),
+      headers: { "Content-Type": "application/json" }
+    });
+
+    if (!response.ok) throw new Error(`Error en POST: ${response.statusText}`);
+
+    const productoNuevo = await response.json();
+    console.log("✅ Producto agregado:", productoNuevo);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+agregarProducto();
