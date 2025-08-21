@@ -52,3 +52,43 @@ async function agregarProducto() {            /*Agrego producto con POST*/
 }
 
 agregarProducto();
+
+//1.5 Se busca producto por id
+async function buscarProductoPorId(id) { 
+  try {
+      const response = await fetch(`https://fakestoreapi.com/products/${id}`); 
+      
+      if (!response.ok) {
+          throw new Error(`Error al buscar producto: ${response.statusText}`);
+      }
+      
+      const producto = await response.json();
+      console.log(`✅ Producto encontrado con ID ${id}:`, producto);
+      
+  } catch (error) {
+      console.error(error);
+  }
+}
+
+buscarProductoPorId(5); 
+
+//1.6 Se elimina producto
+async function borrarProductoPorId(id) {
+  try {
+      const response = await fetch(`https://fakestoreapi.com/products/${id}`, {
+          method: "DELETE" 
+      });
+
+      if (!response.ok) {
+          throw new Error(`Error al eliminar producto: ${response.statusText}`);
+      }
+
+      const productoEliminado = await response.json();
+      console.log(`✅ Producto con ID ${id} eliminado:`, productoEliminado);
+
+  } catch (error) {
+      console.error(error);
+  }
+}
+
+borrarSProductoPorId(6); 
