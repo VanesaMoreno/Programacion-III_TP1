@@ -45,7 +45,7 @@ async function agregarProducto() {            /*Agrego producto con POST*/
     if (!response.ok) throw new Error(`Error en POST: ${response.statusText}`);
 
     const productoNuevo = await response.json();
-    console.log("✅ Producto agregado:", productoNuevo);
+    console.log("Producto agregado:", productoNuevo);
   } catch (error) {
     console.error(error);
   }
@@ -63,7 +63,7 @@ async function buscarProductoPorId(id) {
       }
       
       const producto = await response.json();
-      console.log(`✅ Producto encontrado con ID ${id}:`, producto);
+      console.log(`Producto encontrado con ID ${id}:`, producto);
       
   } catch (error) {
       console.error(error);
@@ -84,11 +84,70 @@ async function borrarProductoPorId(id) {
       }
 
       const productoEliminado = await response.json();
-      console.log(`✅ Producto con ID ${id} eliminado:`, productoEliminado);
+      console.log(`Producto con ID ${id} eliminado:`, productoEliminado);
 
   } catch (error) {
       console.error(error);
   }
 }
 
-borrarSProductoPorId(6); 
+borrarProductoPorId(6); 
+
+
+//1.7 Modificar los datos de un producto (UPDATE).
+
+async function actualizarProducto(id, nuevosDatos) {
+  try {
+    const response = await fetch(`https://fakestoreapi.com/products/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(nuevosDatos),
+      headers: { "Content-Type": "application/json" }
+    });
+
+    if (!response.ok) throw new Error(`Error al actualizar: ${response.statusText}`);
+
+    const productoActualizado = await response.json();
+    console.log(`Producto actualizado`, productoActualizado);
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+actualizarProducto(7, {
+  title: "Zapatillas negras",
+  price: 45000,
+  description: "Actualizado",
+  image: "xxx",
+  category: "Calzado"
+});
+
+// FileSystem
+// Agregar producto al archivo local
+
+function agregarProdLocal(producto) {         
+  try {
+    
+    let data = JSON.parse(fs.readFileSync("productos.json", "utf8"));
+    data.push(producto);
+
+    fs.writeFileSync("productos.json", JSON.stringify(data, null, 2));
+    console.log("Producto agregado al archivo local");
+  } catch (error) {
+    console.error("Error al agregar producto", error.message);
+  }
+}
+
+async function main() {
+  await fetchProducts(); // Espera a que termine de crear productos.json porque sino no lo ejecuta
+  agregarProdLocal({
+    id: 1001,
+    title: "Cartera",
+    price: 25000,
+    description: "Agregado manualmente al archivo",
+    image: "xxx",
+    category: "Carteras"
+  });
+}
+
+main();
