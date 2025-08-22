@@ -7,3 +7,4 @@ González, Natalia;
 👩‍🎓Moreno, Vanesa;
 Hoven, Fernando Paul;
 Dalmas, Florencia Belén;
+Vergara, Fernando;
